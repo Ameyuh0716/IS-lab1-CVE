@@ -39,7 +39,7 @@ known CVE, identifying its root cause, and verifying the fix.
 |---|---|---|
 | 1 | Public git repository | `git@github.com:Ameyuh0716/IS-lab1-CVE.git` |
 | 2 | README.md with description, security measures, scanner screenshots, CVE analysis, root cause, fix, proof | [`../README.md`](../README.md) |
-| 3 | Link to last successful pipeline run | <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39450775738> |
+| 3 | Link to last successful pipeline run | <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39453960169> |
 | 4 | Folder with the fixes | [`../fix/`](../fix/) |
 
 ## 2. Summary

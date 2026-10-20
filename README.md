@@ -8,7 +8,7 @@
 |---|---|
 | Work | Work 1: Secure REST API Development with CI/CD and Real CVE Vulnerability Analysis |
 | Repository | <https://github.com/Ameyuh0716/IS-lab1-CVE> |
-| Last successful pipeline | <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39450775738> |
+| Last successful pipeline | <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39453960169> |
 | Variant | CVE-2022-22963 |
 | Student | Yao Jiangyu |
 | HDU number | 23320115 |
@@ -187,7 +187,7 @@ both cases.
 Workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs on every `push` and
 `pull_request`.
 
-Latest green run: <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39450775738> — both jobs
+Latest green run: <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39453960169> — both jobs
 succeeded, and the `spotbugs-report`, `surefire-reports` and `sca-reports` artifacts are attached.
 
 | Job | Step | Tool | Purpose |
