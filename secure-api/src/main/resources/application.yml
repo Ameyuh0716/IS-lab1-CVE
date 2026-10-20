@@ -1,0 +1,44 @@
+server:
+  port: 9090
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-exception: false
+
+spring:
+  application:
+    name: secure-api
+  datasource:
+    url: jdbc:h2:mem:secureapi;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: false
+  sql:
+    init:
+      mode: always
+
+app:
+  jwt:
+    # Base64 encoded 384-bit key. Override in production: APP_JWT_SECRET.
+    secret: ${APP_JWT_SECRET:jjHiFGdpBPujK1Vc4NJ9A1iCZusgjjA+eYxqy8Kq+QF2a0xJ0zd2mk/t0cXUNzIG}
+    issuer: hdu-is-secure-api
+    expiration: PT1H
+  security:
+    max-login-attempts: 5
+    lockout-duration: PT15M
+    cors-allowed-origins:
+      - http://localhost:3000
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: INFO
+

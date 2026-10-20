@@ -1,0 +1,20 @@
+target/
+*.class
+*.jar
+!fix/**/*.jar
+.idea/
+*.iml
+.vscode/
+.DS_Store
+dependency-check-data/
+
+# Course material - not part of the project
+Labs Full Manual HDU IS.pdf
+
+# Local only: raw command output captured while working
+evidence/
+
+# Internal working notes - kept locally, never published
+docs/NEXT_STEPS.md
+docs/SCREENSHOTS_GUIDE.md
+docs/screenshots/README.md

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- SpotBugs cannot model Spring's dependency injection proxy lifecycle. -->
+    <Match>
+        <Class name="com.hdu.is.secureapi.config.SecurityConfig"/>
+        <Bug pattern="SPRING_ENDPOINT"/>
+    </Match>
+</FindBugsFilter>
