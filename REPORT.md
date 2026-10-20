@@ -38,9 +38,9 @@ known CVE, identifying its root cause, and verifying the fix.
 | # | Required item | Location |
 |---|---|---|
 | 1 | Public git repository | `git@github.com:Ameyuh0716/IS-lab1-CVE.git` |
-| 2 | README.md with description, security measures, scanner screenshots, CVE analysis, root cause, fix, proof | [`../README.md`](../README.md) |
+| 2 | README.md with description, security measures, scanner screenshots, CVE analysis, root cause, fix, proof | [`README.md`](README.md) |
 | 3 | Link to last successful pipeline run | <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39454630564> |
-| 4 | Folder with the fixes | [`../fix/`](../fix/) |
+| 4 | Folder with the fixes | [`fix/`](fix/) |
 
 ## 2. Summary
 
@@ -83,7 +83,7 @@ request with `EL1005E: Type cannot be found 'java.lang.Runtime'` and no file is 
 legitimate `uppercase` function still works.
 
 Detailed explanations, commands and the reasoning behind the fix are in the top-level
-[`README.md`](../README.md); the fixes themselves are in [`../fix/`](../fix/).
+[`README.md`](README.md); the fixes themselves are in [`fix/`](fix/).
 
 ## 3. Control questions
 

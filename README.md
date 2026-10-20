@@ -46,7 +46,8 @@
 ├── vulhub/spring/CVE-2022-22963/   # Vulnerable environment (3.2.2), see §7
 ├── fix/CVE-2022-22963/             # Patched environment (3.2.3) + Dockerfile, see §9
 ├── exploit/poc.sh                  # Reproduces the attack against either environment
-└── docs/                           # Report with title page; screenshots/ holds the evidence images
+├── REPORT.md                       # Lab report: title page, summary, control questions
+└── docs/screenshots/               # Evidence screenshots embedded in this README
 ```
 
 ---
