@@ -15,6 +15,24 @@
 
 ---
 
+## 0. Submission checklist
+
+| # | Required item | Where |
+|---|---|---|
+| 1 | Public git repository with the project code | <https://github.com/Ameyuh0716/IS-lab1-CVE> (public) |
+| 2 | README description of the project and API | §2 |
+| 2 | README description of the implemented security measures | §3 |
+| 2 | README screenshots of the SAST/SCA reports | §4 |
+| 2 | CVE ID and brief description | §5 |
+| 2 | Reproduction sequence with commands and screenshots | §6–§7 |
+| 2 | Root cause analysis | §8 |
+| 2 | Description of the applied fix and why it is effective | §9 |
+| 2 | Proof that the vulnerability is eliminated | §10 |
+| 3 | Link to the last successful pipeline run | <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39453960169> |
+| 4 | Folder with the fixes | [`fix/`](fix/) |
+
+---
+
 ## 1. Repository layout
 
 ```
@@ -28,7 +46,7 @@
 ├── vulhub/spring/CVE-2022-22963/   # Vulnerable environment (3.2.2), see §7
 ├── fix/CVE-2022-22963/             # Patched environment (3.2.3) + Dockerfile, see §9
 ├── exploit/poc.sh                  # Reproduces the attack against either environment
-└── docs/                           # Screenshot checklist for the report
+└── docs/                           # Report with title page; screenshots/ holds the evidence images
 ```
 
 ---
@@ -190,6 +208,20 @@ Workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs on eve
 Latest green run: <https://github.com/Ameyuh0716/IS-lab1-CVE/actions/runs/39453960169> — both jobs
 succeeded, and the `spotbugs-report`, `surefire-reports` and `sca-reports` artifacts are attached.
 
+### 4.0 Scanner reports (screenshots)
+
+![Both CI jobs green](docs/screenshots/ci-01-actions-green.png)
+
+*Both jobs of the latest run succeeded.*
+
+![SpotBugs SAST result](docs/screenshots/ci-02-spotbugs-log.png)
+
+*SAST: SpotBugs reports `BugInstance size is 0` — no Medium or High findings.*
+
+![OWASP/OSV SCA result](docs/screenshots/ci-03-sca-log.png)
+
+*SCA: 91 resolved dependencies, 0 known vulnerabilities, so the gate passes.*
+
 | Job | Step | Tool | Purpose |
 |---|---|---|---|
 | `build-test-sast` | `mvn test` | JUnit 5 + MockMvc | 10 security regression tests |
@@ -320,6 +352,18 @@ curl -i -X POST http://127.0.0.1:8080/functionRouter \
 docker compose -f vulhub/spring/CVE-2022-22963/docker-compose.yml exec -T spring ls -l /tmp/success
 # -rw-r--r-- 1 root root 0 ... /tmp/success
 ```
+
+![Vulnerable container running](docs/screenshots/cve-01-container-up.png)
+
+*Step 1: the vulnerable Spring Cloud Function 3.2.2 container is up on port 8080.*
+
+![SpEL injection request](docs/screenshots/cve-02-exploit.png)
+
+*Step 3–4: the `spring.cloud.function.routing-expression` header is evaluated as SpEL.*
+
+![Proof of command execution](docs/screenshots/cve-03-rce-proof.png)
+
+*Step 5: `/tmp/success` exists inside the container, so the injected command really executed.*
 
 A one-shot script does the same and prints a verdict:
 
@@ -455,12 +499,20 @@ org.springframework.expression.spel.SpelEvaluationException:
 returns `500` (the expression is not a valid function name), but the behaviour is now *fail-safe*:
 the attacker gains nothing.
 
+![Attack blocked on the fixed build](docs/screenshots/fix-01-attack-blocked.png)
+
+*The identical request against the patched build creates no marker file — the attack fails.*
+
 **Regression check.** The legitimate function still works on the fixed build:
 
 ```
 $ curl -s http://127.0.0.1:8081/uppercase -H 'Content-Type: text/plain' --data-binary 'hello'
 HELLO
 ```
+
+![Regression check](docs/screenshots/fix-02-regression.png)
+
+*The normal `uppercase` function still returns `HELLO` after the patch.*
 
 ### Task matrix
 
